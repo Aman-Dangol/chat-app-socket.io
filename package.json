@@ -1,0 +1,5 @@
+{
+  "name": "socket-chat-Application",
+  "version": "1.0.0",
+  "description": "first chat app using socket.io"
+}

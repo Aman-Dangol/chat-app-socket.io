@@ -1,0 +1,33 @@
+* {
+  box-sizing: border-box;
+}
+
+h4 {
+  text-align: center;
+}
+
+.you {
+  border: 2px solid blue;
+  padding: 0.5rem;
+}
+
+.others {
+  padding: 0.5rem;
+  border: 2px solid red;
+  text-align: right;
+}
+
+.text-format {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+div[class="you text-format"] {
+  align-items: flex-start;
+}
+
+.chat-body{
+  overflow-y: scroll;
+  max-height: 30rem;
+}
