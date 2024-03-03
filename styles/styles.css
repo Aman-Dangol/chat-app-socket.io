@@ -2,18 +2,24 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(55, 55, 55);
+  color: aliceblue;
+}
 h4 {
   text-align: center;
 }
 
 .you {
-  border: 2px solid blue;
+  border: 2px solid black;
+  border-collapse: collapse;
   padding: 0.5rem;
 }
 
 .others {
   padding: 0.5rem;
-  border: 2px solid red;
+  border: 2px solid black;
+  border-collapse: collapse;
   text-align: right;
 }
 
@@ -27,7 +33,7 @@ div[class="you text-format"] {
   align-items: flex-start;
 }
 
-.chat-body{
+.chat-body {
   overflow-y: scroll;
   max-height: 30rem;
 }
