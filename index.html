@@ -11,62 +11,23 @@
       <section>
         <h1>Chat Application</h1>
       </section>
-      <section class="chat-body">
+      <section class="chat-body" id="chat-body">
         <div class="you text-format"><span>you</span> <span>message</span></div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
         <div class="others text-format">
           <span>others</span>
           <span>message</span>
         </div>
       </section>
       <section>
-        <form action="" method="post">
+        <form action="" method="post" id="form">
           <div>
-            <input type="text" required placeholder="write your message" />
-            <button>send</button>
+            <input
+              type="text"
+              required
+              placeholder="write your message"
+              id="textBox"
+            />
+            <button id="button">send</button>
           </div>
         </form>
       </section>
@@ -74,6 +35,22 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
+
+      let form = document.getElementById("form");
+      let textbox = document.getElementById("textBox");
+      let chatbody = document.getElementById('chat-body');
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (textbox.value) {
+          let messagebody = document.createElement('div');
+          messagebody.className="you text-format";
+          messagebody.innerHTML=`<span>you</span><span>${textbox.value}</span>`
+          chatbody.appendChild(messagebody);
+          socket.emit("chat-message", textbox.value);
+          textbox.value = "";
+        }
+      });
     </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 const http = require("http");
 const fs = require("fs");
-const path = require("path");
+const { Server } = require("socket.io");
 const server = http.createServer((req, res) => {
   if (req.url == "/") {
     res.setHeader("content-type", "text/html");
@@ -17,11 +17,17 @@ const server = http.createServer((req, res) => {
 
 server.listen(3000);
 
-
-
-const { Server } = require("socket.io");
 const io = new Server(server);
 
-io.on('connection',(socket)=>{
+// when a socket connects to a the server
+io.on("connection", (socket) => {
   console.log("user connected");
-})
+  // when the socket disconnects
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+  // when a message is sent
+  socket.on("chat-message", (message) => {
+    console.log(message);
+  });
+});
