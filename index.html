@@ -11,13 +11,7 @@
       <section>
         <h1>Chat Application</h1>
       </section>
-      <section class="chat-body" id="chat-body">
-        <div class="you text-format"><span>you</span> <span>message</span></div>
-        <div class="others text-format">
-          <span>others</span>
-          <span>message</span>
-        </div>
-      </section>
+      <section class="chat-body" id="chat-body"></section>
       <section>
         <form action="" method="post" id="form">
           <div>
@@ -34,6 +28,8 @@
     </main>
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      let userName = prompt("enter you name");
+      console.log(userName);
       const socket = io();
 
       let form = document.getElementById("form");
@@ -45,9 +41,12 @@
         if (textbox.value) {
           let messagebody = document.createElement("div");
           messagebody.className = "you text-format";
-          messagebody.innerHTML = `<span>you</span><span>${textbox.value}</span>`;
+          messagebody.innerHTML = `<span>${userName}</span><span>${textbox.value}</span>`;
           chatbody.appendChild(messagebody);
-          socket.emit("chat-message", textbox.value);
+          socket.emit("chat-message", {
+            sender: userName,
+            message: textbox.value,
+          });
           textbox.value = "";
         }
       });
@@ -56,9 +55,9 @@
         console.log(msg);
         let messagebody = document.createElement("div");
         messagebody.className = "others text-format";
-        messagebody.innerHTML = `<span>you</span><span>${msg}</span>`;
+        messagebody.innerHTML = `<span>${msg.sender}</span><span>${msg.message}</span>`;
         chatbody.appendChild(messagebody);
-        chatbody.scrollTo(0,chatbody.scrollHeight);
+        chatbody.scrollTo(0, chatbody.scrollHeight);
       });
     </script>
   </body>

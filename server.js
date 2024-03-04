@@ -28,6 +28,8 @@ io.on("connection", (socket) => {
   });
   // when a message is sent
   socket.on("chat-message", (message) => {
-    io.emit("receive-message",message);
+    console.log(message);
+    // io.emit("receive-message",message);
+    socket.broadcast.emit('receive-message',message)
   });
 });
