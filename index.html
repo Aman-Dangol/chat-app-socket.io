@@ -41,7 +41,7 @@
         if (textbox.value) {
           let messagebody = document.createElement("div");
           messagebody.className = "you text-format";
-          messagebody.innerHTML = `<span>${userName}</span><span>${textbox.value}</span>`;
+          messagebody.innerHTML = `<span>you</span><span>${textbox.value}</span>`;
           chatbody.appendChild(messagebody);
           socket.emit("chat-message", {
             sender: userName,
