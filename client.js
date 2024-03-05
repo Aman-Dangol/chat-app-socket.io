@@ -25,10 +25,10 @@ form.addEventListener("submit", (e) => {
     });
     textbox.value = "";
   }
+  chatbody.scrollTo(0, chatbody.scrollHeight);
 });
 
 socket.on("receive-message", (msg) => {
-  console.log(msg);
   let messagebody = document.createElement("div");
   messagebody.className = "others text-format";
   messagebody.innerHTML = `<span>${msg.sender}</span><span>${msg.message}</span>`;
