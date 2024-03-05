@@ -12,6 +12,16 @@ const server = http.createServer((req, res) => {
     let data = fs.readFileSync("./styles/styles.css");
     res.write(data);
     res.end();
+  } else if (req.url == "/client.js") {
+    res.setHeader("content-type", "text/javascript");
+    res.statusCode = 200;
+    fs.readFile("./client.js", (err, data) => {
+      if (err) {
+        res.end("file not found");
+        return;
+      }
+      res.end(data);
+    });
   }
 });
 
@@ -30,6 +40,11 @@ io.on("connection", (socket) => {
   socket.on("chat-message", (message) => {
     console.log(message);
     // io.emit("receive-message",message);
-    socket.broadcast.emit('receive-message',message);
+    socket.to(message.room).emit("receive-message", message);
+  });
+  // joining a room
+  socket.on("join-room", (room) => {
+    console.log(room);
+    socket.join(room);
   });
 });
