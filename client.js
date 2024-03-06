@@ -42,15 +42,27 @@ roomForm.addEventListener("submit", (e) => {
   e.preventDefault();
   roomValue = roomInput.value;
   socket.emit("join-room", roomValue);
-  let joinedNotify = document.createElement("div");
-  joinedNotify.id = "room-info";
-  joinedNotify.innerHTML = `You've joined ${roomValue}`;
-  chatbody.appendChild(joinedNotify);
+  displayRoom(roomValue);
 });
 
 function getUserName() {
   userName = prompt("enter you name");
+  if (/^\s*$/.test(userName)) {
+    console.log("username");
+    userName = "stranger";
+  } else {
+    console.log("regext false");
+  }
   name_display.innerHTML = `User-name: ${userName}`;
 }
 
+function displayRoom(roomValue) {
+  let joinedNotify = document.createElement("div");
+  joinedNotify.id = "room-info";
+  if (roomValue == "") {
+    joinedNotify.innerHTML = `You've joined global chat`;
+  } else joinedNotify.innerHTML = `You've joined ${roomValue} chat`;
+  chatbody.appendChild(joinedNotify);
+}
 getUserName();
+displayRoom("");
