@@ -34,7 +34,7 @@ div[class="you text-format"] {
 .chat-body {
   min-height: 30rem;
   max-height: 30rem;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 form > div {
