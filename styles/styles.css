@@ -11,7 +11,7 @@ h1 {
 }
 
 .you {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid white;
   padding: 0.5rem;
 }
 
@@ -19,17 +19,16 @@ h1 {
   padding: 0.5rem;
   border-bottom: 2px solid black;
   border-collapse: collapse;
-  text-align: right;
 }
 
 .text-format {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: flex-start;
 }
 
 div[class="you text-format"] {
-  align-items: flex-start;
+  align-items: flex-end;
 }
 
 .chat-body {
