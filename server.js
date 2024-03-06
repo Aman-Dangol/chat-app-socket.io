@@ -39,6 +39,10 @@ io.on("connection", (socket) => {
   // when a message is sent
   socket.on("chat-message", (message) => {
     // io.emit("receive-message",message);
+    if (message.room == "") {
+      socket.broadcast.emit("receive-message", message);
+      return;
+    }
     socket.to(message.room).emit("receive-message", message);
   });
   // joining a room
