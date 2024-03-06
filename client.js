@@ -1,7 +1,6 @@
 import { io } from "https://cdn.socket.io/4.7.4/socket.io.esm.min.js";
 
-let userName = prompt("enter you name");
-console.log(userName);
+let userName = "";
 const socket = io();
 
 let form = document.getElementById("form");
@@ -9,6 +8,7 @@ let textbox = document.getElementById("textBox");
 let chatbody = document.getElementById("chat-body");
 let roomForm = document.getElementById("roomForm");
 let roomInput = document.getElementById("room");
+let name_display = document.getElementById("name-display");
 let roomValue = "";
 
 form.addEventListener("submit", (e) => {
@@ -42,4 +42,15 @@ roomForm.addEventListener("submit", (e) => {
   e.preventDefault();
   roomValue = roomInput.value;
   socket.emit("join-room", roomValue);
+  let joinedNotify = document.createElement("div");
+  joinedNotify.id = "room-info";
+  joinedNotify.innerHTML = `You've joined ${roomValue}`;
+  chatbody.appendChild(joinedNotify);
 });
+
+function getUserName() {
+  userName = prompt("enter you name");
+  name_display.innerHTML = `User-name: ${userName}`;
+}
+
+getUserName();
