@@ -63,6 +63,7 @@ function displayRoom(roomValue) {
     joinedNotify.innerHTML = `You've joined global chat`;
   } else joinedNotify.innerHTML = `You've joined ${roomValue} chat`;
   chatbody.appendChild(joinedNotify);
+  chatbody.scrollTo(0, chatbody.scrollHeight);
 }
 getUserName();
 displayRoom("");
