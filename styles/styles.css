@@ -54,7 +54,15 @@ form > div > input {
 }
 
 /* notify which room you have joined */
-#room-info {
+#room-info ,
+.notify {
   text-align: center;
   background-color: rgb(48, 39, 39);
+}
+
+
+/* textBox */
+
+#textBox{
+  height: 30px;
 }

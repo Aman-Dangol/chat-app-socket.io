@@ -41,7 +41,10 @@ socket.on("receive-message", (msg) => {
 roomForm.addEventListener("submit", (e) => {
   e.preventDefault();
   roomValue = roomInput.value;
-  socket.emit("join-room", roomValue);
+  socket.emit("join-room", {
+    value: roomValue,
+    name: userName,
+  });
   displayRoom(roomValue);
 });
 
@@ -61,9 +64,24 @@ function displayRoom(roomValue) {
   joinedNotify.id = "room-info";
   if (roomValue == "") {
     joinedNotify.innerHTML = `You've joined global chat`;
+    socket.emit("join-room", {
+      name: userName,
+      value: "global",
+    });
   } else joinedNotify.innerHTML = `You've joined ${roomValue} chat`;
   chatbody.appendChild(joinedNotify);
   chatbody.scrollTo(0, chatbody.scrollHeight);
 }
+
+socket.on("joined-room", (room) => {
+  let div = document.createElement("div");
+  console.log(room);
+  div.className = "notify";
+  if (!room.value) {
+    room.value = "Global chat";
+  }
+  div.innerHTML = `${room.name} has joined the ${room.value} chat`;
+  chatbody.appendChild(div);
+});
 getUserName();
 displayRoom("");

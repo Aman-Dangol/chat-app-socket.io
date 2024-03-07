@@ -48,6 +48,7 @@ io.on("connection", (socket) => {
   // joining a room
   socket.on("join-room", (room) => {
     console.log(room);
-    socket.join(room);
+    socket.join(room.value);
+    socket.to(room.value).emit("joined-room", room);
   });
 });
